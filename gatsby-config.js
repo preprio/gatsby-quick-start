@@ -8,8 +8,17 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `My Gatsby Site`,
+    title: `Prepr Gatsby Quickstart`,
     siteUrl: `https://www.yourdomain.tld`,
   },
-  plugins: [],
+  plugins: [
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "Prepr",
+        fieldName: "prepr",
+        url: process.env.PREPR_GRAPHQL_URL,
+      }
+    }
+  ],
 }
