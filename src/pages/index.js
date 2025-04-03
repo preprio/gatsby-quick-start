@@ -5,7 +5,7 @@ const IndexPage = () => {
   const preprData = useStaticQuery(graphql`
     query {
       prepr {
-        Articles {
+        Posts {
           items {
             _id
             _slug
@@ -16,7 +16,7 @@ const IndexPage = () => {
     }
   `)
 
-  const articles = preprData.prepr.Articles
+  const posts = preprData.prepr.Posts
 
   return (
     <main>
@@ -24,9 +24,9 @@ const IndexPage = () => {
         My blog site
       </h1>
       <ul>
-        {articles.items.map(article => (
-          <li key={article._id}>
-            <a href={article._slug}>{article.title}</a>
+        {posts.items.map(posts => (
+          <li key={posts._id}>
+            <a href={posts._slug}>{posts.title}</a>
           </li>
         ))}
       </ul>

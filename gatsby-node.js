@@ -2,7 +2,7 @@ exports.createPages = async ({ actions, graphql }) => {
   const { data } = await graphql(`
     query {
       prepr {
-        Articles {
+        Posts {
           items {
             _slug
           }
@@ -10,7 +10,7 @@ exports.createPages = async ({ actions, graphql }) => {
       }
     }
   `)
-  data.prepr.Articles.items.forEach( (item) => {
+  data.prepr.Posts.items.forEach( (item) => {
     const slug = item._slug
     actions.createPage({
       path: slug,

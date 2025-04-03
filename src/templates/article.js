@@ -1,20 +1,20 @@
 import * as React from "react"
 import {graphql} from "gatsby";
 
-const ArticlePage = ({data}) => {
-  const article = data.prepr.Article
+const PostPage = ({data}) => {
+  const post = data.prepr.Post
   return (
     <main>
       <h1>
-        {article.title}
+        {post.title}
       </h1>
 
-      {article.content.map((content,index) => (
+      {post.content.map((content,index) => (
         <div key={index}>
 
           {
             content.__typename === "Prepr_Assets" &&
-            <img src={content.items[0].url} width="300" height="250" alt="{article.title}" />
+            <img src={content.items[0].url} width="300" height="250" alt="{post.title}" />
           }
 
           {
@@ -30,18 +30,23 @@ const ArticlePage = ({data}) => {
 export const query = graphql`
   query($slug: String!) {
     prepr {
-      Article(slug: $slug) {
+      Post (slug: $slug) {
         _id
         title
+        cover {
+          url(width: 300, height: 250)
+        }
         content {
           __typename
           ... on Prepr_Text {
+            _id
             body
             text
           }
           ... on Prepr_Assets {
             items {
-              url
+              _id
+              url(width: 300, height: 250)
             }
           }
         }
@@ -50,6 +55,6 @@ export const query = graphql`
   }
 `
 
-export default ArticlePage
+export default PostPage
 
-export const Head = () => <title>Article Page</title>
+export const Head = () => <title>Post Page</title>
